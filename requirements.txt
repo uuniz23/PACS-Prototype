@@ -1,0 +1,8 @@
+# 앱 실행용 패키지
+# TODO: 팀 공통 Python 버전이 정해지면 로컬에서 설치·실행이 되는 버전을 확인해
+#       `pip freeze`로 ==버전 고정을 한다. (OpenCV, Pillow, firebase-admin 등은
+#       그 패키지를 쓰는 PR에서 함께 추가한다)
+streamlit>=1.30.0
+pandas>=2.0.0
+numpy>=1.24.0
+plotly>=5.18.0
