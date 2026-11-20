@@ -35,6 +35,7 @@ git clone https://github.com/uuniz23/PACS-Prototype.git
 cd PACS-Prototype
 
 python -m venv .venv
+# Windows Git Bash:   source .venv/Scripts/activate
 # Windows PowerShell: .venv\Scripts\Activate.ps1
 # Windows cmd:        .venv\Scripts\activate.bat
 # macOS / Linux:      source .venv/bin/activate
@@ -46,6 +47,19 @@ pytest                            # 테스트
 ```
 
 줄 맨 앞에 `(.venv)`가 보이는 상태(가상환경이 켜진 상태)에서 실행합니다.
+Windows는 가상환경 폴더가 `bin`이 아니라 `Scripts`입니다. 사용하는 터미널(Git Bash, PowerShell, cmd)에 맞는 명령을 고르세요.
+
+### 자주 막히는 곳
+
+| 증상 | 원인 | 해결 |
+|---|---|---|
+| `streamlit: command not found`, `pytest: command not found` | 가상환경이 켜져 있지 않음 (패키지가 가상환경 밖에 설치됨) | 위 활성화 명령 실행 → `(.venv)` 확인 → `pip install -r requirements.txt -r requirements-dev.txt` 다시 실행 |
+| `source: .venv/bin/activate: No such file or directory` (Windows) | Windows는 `bin`이 아니라 `Scripts` | `source .venv/Scripts/activate` |
+| PowerShell에서 `Activate.ps1` 실행이 막힘 | 스크립트 실행 정책 | cmd에서 `.venv\Scripts\activate.bat` 사용 |
+| `python`을 찾을 수 없음 (Windows) | python 경로 미등록 | `py -3.11 -m venv .venv`처럼 `py` 런처 사용 (버전은 팀 공통 버전) |
+| `Port 8501 is already in use` | 이전에 켠 앱이 실행 중 | 이전 터미널에서 `Ctrl + C`, 또는 `streamlit run streamlit_app.py --server.port 8502` |
+
+임시로 PATH 문제만 피하려면 `python -m streamlit run streamlit_app.py`, `python -m pytest`처럼 실행할 수 있습니다. 평소에는 가상환경을 켠 상태로 사용합니다.
 
 ## Firebase 설정 (비밀 값)
 
