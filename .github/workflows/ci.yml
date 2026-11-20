@@ -18,7 +18,7 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11" # 팀 공통 Python 버전이 정해지면 이 값을 맞출 것
+          python-version: "3.14" # 팀 공통 Python 버전이 정해지면 이 값을 맞출 것
 
       - name: Install dependencies
         run: pip install -r requirements.txt -r requirements-dev.txt
