@@ -3,7 +3,7 @@
 Python · Streamlit · Firebase(Authentication, Cloud Firestore) 기반 교육용 웹 PACS 프로토타입입니다.
 (초급프로젝트 PBL Term Project)
 
-> **팀 공통 Python 버전: `3.__`** ← 팀장이 정해 이 줄을 채웁니다. `python --version`의 앞 두 자리가 같아야 합니다.
+> **팀 공통 Python 버전: `3.14`** `python --version`의 앞 두 자리가 같아야 합니다.
 
 ## 프로젝트 구조
 
@@ -79,7 +79,38 @@ CI(GitHub Actions)는 **pytest만** 실행합니다. 배포와 비밀 값 사용
 
 ## 배포 (JCloud)
 
-> 배포 방법이 확인되면 이 항목에 실행·배포·복구 순서를 적습니다.
+서버: JCloud 인스턴스 1대(Ubuntu, micro: vCPU 2 / RAM 2 GiB / 디스크 10 GiB). 서버 접속과 배포 반영은 **팀장만** 합니다. 팀원은 아래 주소에서 확인만 합니다.
+
+- 접속 주소: `http://s.jedutools.io:53128` (서버 내부 포트 8080 → 공인 포트 53128으로 포워딩)
+- 서버 접속: SSH (`s.jedutools.io`, 포트 `13128`, 계정 `ubuntu`, 키 파일 인증). 키 파일은 팀장만 보관하며 저장소에 올리지 않습니다.
+- 앱 위치: 서버의 `~/PACS-Prototype` (가상환경 `.venv`, 서버에는 `requirements.txt`만 설치)
+- 비밀 값: 서버에서 직접 만든 `.streamlit/secrets.toml` 사용 (git에 없으며, 값을 바꾸면 서버에서 직접 수정 후 앱 재시작)
+
+### 앱 실행 (tmux로 상시 실행)
+
+```bash
+tmux new -s app                      # 처음 한 번 세션 만들기
+cd ~/PACS-Prototype && source .venv/bin/activate
+streamlit run streamlit_app.py --server.port 8080 --server.address 0.0.0.0
+# Ctrl+B 누르고 손을 뗀 뒤 소문자 d → 세션에서 빠져나와도 앱은 계속 실행
+```
+
+- 세션 목록: `tmux ls` / 다시 들어가기: `tmux attach -t app`
+- 서버가 재부팅되면 앱이 꺼지므로 위 순서로 다시 실행합니다.
+
+### 배포 반영 (PR 병합 후, 팀장이 서버에서)
+
+```bash
+tmux attach -t app                   # Ctrl+C로 앱 중지
+git pull origin main
+pip install -r requirements.txt      # 패키지가 바뀐 경우만
+streamlit run streamlit_app.py --server.port 8080 --server.address 0.0.0.0
+# Ctrl+B, d
+```
+
+- 서버에서는 `main`만 받고, **서버 코드는 직접 수정하지 않습니다**(수정은 항상 PR).
+- 반영 후 팀 채널에 "배포 반영함"을 알립니다.
+- 앱이 응답하지 않으면 `tmux attach -t app`으로 들어가 오류 메시지를 확인하고 재시작합니다.
 
 ## 사용한 AI·수업 코드·외부 자료
 
