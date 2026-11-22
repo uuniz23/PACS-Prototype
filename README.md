@@ -91,7 +91,6 @@ CI(GitHub Actions)는 **pytest만** 실행합니다. 배포와 비밀 값 사용
 서버: JCloud 인스턴스 1대(Ubuntu, micro: vCPU 2 / RAM 2 GiB / 디스크 10 GiB). 서버 접속과 배포 반영은 **팀장만** 합니다. 팀원은 아래 주소에서 확인만 합니다.
 
 - 접속 주소: `http://s.jedutools.io:53128` (서버 내부 포트 8080 → 공인 포트 53128으로 포워딩)
-- 서버 접속: SSH (`s.jedutools.io`, 포트 `13128`, 계정 `ubuntu`, 키 파일 인증). 키 파일은 팀장만 보관하며 저장소에 올리지 않습니다.
 - 앱 위치: 서버의 `~/PACS-Prototype` (가상환경 `.venv`, 서버에는 `requirements.txt`만 설치)
 - 비밀 값: 서버에서 직접 만든 `.streamlit/secrets.toml` 사용 (git에 없으며, 값을 바꾸면 서버에서 직접 수정 후 앱 재시작)
 
