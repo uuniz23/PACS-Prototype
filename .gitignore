@@ -25,3 +25,7 @@ htmlcov/
 *.swp
 *.swo
 .DS_Store
+
+# 영상 데이터 (Kaggle 약관상 재배포 금지, 각자 직접 받기)
+data/
+*.dcm
