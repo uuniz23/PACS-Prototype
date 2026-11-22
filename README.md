@@ -61,6 +61,15 @@ Windows는 가상환경 폴더가 `bin`이 아니라 `Scripts`입니다. 사용�
 
 임시로 PATH 문제만 피하려면 `python -m streamlit run streamlit_app.py`, `python -m pytest`처럼 실행할 수 있습니다. 평소에는 가상환경을 켠 상태로 사용합니다.
 
+## 데이터 준비 (영상)
+
+영상 데이터는 **저장소에 올리지 않습니다.** 약관상 재배포가 제한되어 있어서, 팀원마다 직접 받습니다.
+
+1. Kaggle 계정으로 로그인하고 RSNA Pneumonia Detection Challenge 페이지에서 규칙에 동의합니다.
+2. Data 탭에서 `stage_2_train_images`(DICOM)와 `stage_2_train_labels.csv`를 받습니다.
+3. 프로젝트 폴더에 `data/` 폴더를 만들어 넣습니다. 영상은 전체를 쓰지 말고 일부(100~200장)만 골라 씁니다.
+4. `data/`와 `*.dcm`은 `.gitignore`에 들어 있으므로 커밋되지 않습니다. `git status`에 보이면 올리기 전에 알려 주세요.
+
 ## Firebase 설정 (비밀 값)
 
 - 실제 키 값은 이 저장소에 없습니다. 값은 **팀장에게 직접 받아** `.streamlit/secrets.toml`에 저장합니다.
@@ -76,7 +85,7 @@ Windows는 가상환경 폴더가 `bin`이 아니라 `Scripts`입니다. 사용�
 5. PR 하단 Checks의 CI(pytest)가 초록색인지 확인하고, 리뷰어 승인 후 병합합니다.
 
 CI(GitHub Actions)는 **pytest만** 실행합니다. 배포와 비밀 값 사용은 하지 않습니다.
-
+(pytest는 branch 작업 시 main에서 작동중이던 기능을 훼손했는지 확인하는 과정입니다.)
 ## 배포 (JCloud)
 
 서버: JCloud 인스턴스 1대(Ubuntu, micro: vCPU 2 / RAM 2 GiB / 디스크 10 GiB). 서버 접속과 배포 반영은 **팀장만** 합니다. 팀원은 아래 주소에서 확인만 합니다.
