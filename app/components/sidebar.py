@@ -2,12 +2,21 @@
 
 import streamlit as st
 
+from app.components.session import get_current_user, logout
+
 
 def render_sidebar() -> str:
     """사이드바를 렌더링하고 선택된 페이지 이름을 반환합니다."""
     with st.sidebar:
         st.markdown("## 🏥 **PACS Dashboard**")
         st.caption("의료영상 저장전송시스템 모니터링")
+        user = get_current_user()
+        if user is not None:
+            st.markdown(f"👤 {user.email}")
+            if st.button("로그아웃", use_container_width=True):
+                logout()
+                st.rerun()
+
         st.divider()
 
         # 네비게이션
