@@ -51,8 +51,9 @@ Firestore는 표가 아니라 문서 묶음이다. 컬렉션끼리는 ID 값을 
 - 경로 예: `uploads/<case_id>/<image_id>/original.dcm`, `uploads/<case_id>/<image_id>/results/<run_key>.png`
 - 파일마다 `sha256`을 `images`에 저장하고, 불러올 때 다시 계산해서 다르면 경고한다.
 - DB에는 파일 자체가 아니라 **경로 문자열만** 저장한다.
-- 저장 위치: Jcloud DB.
-#firebase storage는 유료 제공이라 사용이 불가합니다.
+- 저장 위치: JCloud 서버 디스크. (Firebase Storage는 유료 제공이라 사용하지 않는다.)
+- 저장 루트는 설정값으로 둔다. 서버 예 `~/pacs-data/uploads`, 로컬 예 `data/uploads`. 서버에서는 저장소 폴더(`~/PACS-Prototype`) 밖에 둔다.
+- `images`의 원본 파일 경로에는 저장 루트 기준 상대 경로만 저장한다.
 
 ## 5. 검토 상태 전이표
 
