@@ -1,10 +1,12 @@
 """PACS Team - Streamlit 메인 진입점"""
 
 import streamlit as st
+from app.components.session import is_logged_in
 from app.utils.helpers import init_session_state
 from app.components.sidebar import render_sidebar
 from app.pages.home import render_home_page
 from app.pages.dashboard import render_dashboard_page
+from app.pages.login import render_login_page
 
 
 def main():
@@ -14,6 +16,11 @@ def main():
         layout="wide",
         initial_sidebar_state="expanded",
     )
+
+    # 0. 로그인 전에는 로그인 화면만 보여 주고 여기서 멈춘다.
+    if not is_logged_in():
+        render_login_page()
+        st.stop()
 
     # 1. 세션 상태 초기화
     init_session_state()
