@@ -7,3 +7,5 @@ pandas>=2.0.0
 numpy>=1.24.0
 plotly>=5.18.0
 requests>=2.31.0
+pydicom>=3.0.0
+pillow>=10.0.0  # JPEG 압축 DICOM의 픽셀 해제에 사용 (pydicom이 Pillow로 풀기 때문)
